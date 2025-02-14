@@ -1,0 +1,143 @@
+* {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #3D3D3D;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #F5ECD5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    align-items: center;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form button,
+.add {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+#form-cb-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 15px;
+}
+
+.button-container> :last-child {
+    margin-left: auto;
+}
+
+.star {
+    font-size: 20px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+q .star-container {
+    text-align: right;
+}
+
+.star-background {
+    color: #ddd;
+}
+
+.star-foreground {
+    color: #ffc107;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.watchlist-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.watchlist-item button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    margin-right: 5px;
+}
+
+#rating-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#new-description {
+    min-width: 15vw;
+    min-height: 5vw;
+    resize: none;
+}
+
+#add-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.add {
+    background-color: #2866a8;
+}
+
+.update {
+    background-color: #578E7E;
+}
+
+.delete {
+    background-color: #c4303f;
+}
+
+.rate {
+    background-color: #e27c28;
+}
+
+.watched {
+    background-color: #ffc107;
+}
