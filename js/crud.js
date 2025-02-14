@@ -53,7 +53,7 @@ function renderWatchlist(items) {
             <div><strong>${item.title}</strong> (${item.year})</div>
             <input type="hidden" id="itemid" value="${item.id}">
             <input type="hidden" id="update-Rating" value="${item.rating}">
-            <div>${item.description}</div>
+            <div class="description-div">${item.description}</div>
             <div>
                 Rating: ${renderStars(item.rating, item.id)}
             </div>
@@ -70,7 +70,7 @@ function renderWatchlist(items) {
             <div><strong>${item.title}</strong> (${item.year})</div>
                 <input type="hidden" id="itemid" value="${item.id}">
                 <input type="hidden" id="update-Rating" value="${item.rating}">
-                <div>${item.description}</div>
+                <div class="description-div">${item.description}</div>
                 <div class="button-container">
                     <button class="update" onclick="updateItem('${item.id}')">Edit</button>
                     <button class="rate" onclick="rateItem('${item.id}')">Watched</button>
@@ -132,7 +132,7 @@ function renderStars(rating, itemId) {
 async function createItem() {
     const title = document.getElementById('new-title').value;
     const description = document.getElementById('new-description').value;
-    const year = document.getElementById('new-year').value;
+    const year = parseInt(document.getElementById('new-year').value, 10);
     await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -144,7 +144,6 @@ async function createItem() {
 //Edit
 function updateItem(itemid) {
     currentItem = data.find(item => item.id === itemid);
-    console.log(currentItem);
     document.getElementById('update-title').value = currentItem.title;
     document.getElementById('update-description').value = currentItem.description;
     document.getElementById('update-year').value = currentItem.year;
@@ -153,12 +152,12 @@ function updateItem(itemid) {
 }
 
 async function sendUpdateItem() {
-    const title = document.getElementById('new-title').value;
-    const description = document.getElementById('new-description').value;
-    const year = document.getElementById('new-year').value;
-
-    if (currentItem.rating) {
-        const rating = data.find(item => item.id === itemid).rating;
+    console.log(currentItem);
+    const title = document.getElementById('update-title').value;
+    const description = document.getElementById('update-description').value;
+    const year = parseInt(document.getElementById('update-year').value, 10);
+    const rating = currentItem.rating;
+    if (rating) {
         await fetch(`${API_URL}/${currentItem.id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title, description, year, rating }) });
     } else {
         await fetch(`${API_URL}/${currentItem.id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title, description, year }) });
@@ -177,7 +176,7 @@ function rateItem(itemid) {
 }
 
 async function sendRateItem() {
-    const rating = document.getElementById('update-Rating').value;
+    const rating = parseInt(document.getElementById('update-Rating').value, 10);
     const title = currentItem.title;
     const description = currentItem.description;
     const year = currentItem.year;
@@ -192,8 +191,8 @@ async function deleteItem(id) {
     fetchWatchlist();
 }
 
-addForm.addEventListener('submit', (e) => { e.preventDefault(); createItem(); });
-updateForm.addEventListener('submit', (e) => { e.preventDefault(); sendUpdateItem(); });
-rateForm.addEventListener('submit', (e) => { e.preventDefault(); sendRateItem(); });
+addForm.addEventListener('submit', (e) => { createItem(); });
+updateForm.addEventListener('submit', (e) => { sendUpdateItem(); });
+rateForm.addEventListener('submit', (e) => { sendRateItem(); });
 
 fetchWatchlist();

@@ -104,6 +104,11 @@ q .star-container {
     margin-right: 5px;
 }
 
+.description-div {
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
 #rating-container {
     display: flex;
     justify-content: center;
